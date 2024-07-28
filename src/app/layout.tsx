@@ -24,6 +24,7 @@ export default function RootLayout({
             style: {
               padding: "10px 20px",
               font: "bold",
+              fontFamily: 'poppins'
             },
           }}
         />

@@ -28,7 +28,7 @@ function Navbar({}: Props) {
   const notificationRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <nav className="font-poppins relative border-b-[3px]">
+    <nav className="font-poppins z-20 bg-white sticky top-0 left-0 border-b-[3px]">
       <div className="h-[60px] px-5 py-10 flex justify-between items-center z-20">
         <Link href="/">
           <h1 className="font-bold text-3xl">My Gov</h1>

@@ -47,9 +47,6 @@ function HomePage({}: Props) {
         const result = await response.json();
 
         if (result.success) {
-          toast.success(`${result.msg}`, {
-            duration: 5000,
-          });
           setOtherDetails((prev: any) => ({
             ...prev,
             deptName: result.data.name,
@@ -88,7 +85,6 @@ function HomePage({}: Props) {
         const result = await response.json();
 
         if (result.success) {
-          toast.success("dept names fetched");
           setDeptNames(result.data);
         } else {
           toast.error(`${result.msg}`, {
@@ -105,8 +101,9 @@ function HomePage({}: Props) {
     fetchDepartmentNames();
   }, []);
 
-  const renderDepts = deptNames?.map((item) => (
+  const renderDepts = deptNames?.map((item, number) => (
     <Button
+      key={number}
       variant="ghost"
       onClick={() => {
         setCurrOption(item.name);
@@ -117,8 +114,9 @@ function HomePage({}: Props) {
     </Button>
   ));
 
-  const renderAssets = assets?.map((item) => (
+  const renderAssets = assets?.map((item, index) => (
     <Asset
+      key={index}
       id={otherDetails.id}
       deptName={otherDetails.deptName}
       email={otherDetails.email}
@@ -148,7 +146,7 @@ function HomePage({}: Props) {
             onClick={() => {
               triggerRef2.current?.click();
             }}
-            className="dept py-7 rounded-sm text-lg group bg-gray-300 hover:text-white hover:bg-[rgb(104,143,250)]"
+            className="dept py-7 rounded-sm text-lg group bg-gray-200 hover:text-white hover:bg-[rgb(104,143,250)]"
           >
             Add Dept.
           </Button>

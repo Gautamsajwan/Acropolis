@@ -98,7 +98,7 @@ function AddDepartment({ handleNo, triggerRef }: Props) {
           <Card className="sm:w-[600px] h-screen overflow-hidden flex flex-col z-10">
             <CardHeader className="bg-blue-300">
               <CardTitle className="text-xl font-bold flex items-center gap-2">
-                Add new asset
+                Add new Dept
                 <Code2 />
               </CardTitle>
               <CardDescription className="text-gray-900 font-semibold">

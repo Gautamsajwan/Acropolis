@@ -24,7 +24,7 @@ function Asset({ id, deptName, email, name, total_asset, assigned }: Props) {
           </div>
         </div>
 
-        <h2 className="text-lg font-semibold">{name}</h2>
+        <h2 className="text-xl font-semibold capitalize">{name}</h2>
 
         <div className="flex items-center gap-4 text-sm">
           <div className="bg-green-200 w-1/2 p-1 px-2 rounded-sm">
@@ -38,7 +38,7 @@ function Asset({ id, deptName, email, name, total_asset, assigned }: Props) {
           </div>
         </div>
 
-        <Link href={`/assetDetails?id=${encodeURIComponent(id)}&deptName=${encodeURIComponent(deptName)}`} className="w-full">
+        <Link href={`/assetDetails?id=${encodeURIComponent(id)}&assetType=${encodeURIComponent(name)}`} className="w-full">
           <Button className="hover:bg-blue-400 w-full">Detailed Info</Button>
         </Link>
       </div>

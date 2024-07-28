@@ -18,10 +18,11 @@ import {
 } from "react-hook-form";
 import { OctagonAlert, Code2 } from "lucide-react";
 import { RefObject } from "react";
+import toast from "react-hot-toast";
 
 type FormValues = {
-  assetName: string;
-  quantity: number;
+  deptId: string;
+  uniqueId: string;
   type: string;
 };
 
@@ -49,7 +50,37 @@ function AddDetails({ isUpdate, handleNo, triggerRef }: Props) {
   } = useForm<FormValues>();
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    console.log(data);
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASEURL}/api/v1/add-assets`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            deptId: data.deptId,
+            uniqueId: data.uniqueId.split(','),
+            type: data.type
+          }),
+        }
+      );
+
+      const result = await response.json();
+
+      if (result.success) {
+        toast.success(`${result.msg}`, {
+          duration: 5000,
+        });
+        triggerRef.current?.click()
+      } else {
+        toast.error(`${result.msg}`, {
+          duration: 5000,
+        });
+      }
+    } catch (error: any) {
+      console.error(error.message);
+    }
   };
 
   return (
@@ -74,23 +105,23 @@ function AddDetails({ isUpdate, handleNo, triggerRef }: Props) {
               >
                 {/* User Name */}
                 <InputBlock
-                  label="Asset Name"
-                  id="assetName"
-                  placeholder="Enter your asset name"
-                  error={errors.assetName}
+                  label="Department id"
+                  id="deptId"
+                  placeholder="Enter the dept. id"
+                  error={errors.deptId}
                   type="text"
-                  register={register("assetName", {
+                  register={register("deptId", {
                     required: "this field cant be empty",
                   })}
                 />
 
                 <InputBlock
-                  label="Asset quantity"
-                  id="quantity"
-                  placeholder="Enter the quantity"
+                  label="Unique id"
+                  id="uniqueId"
+                  placeholder="Enter the uniqueId"
                   type="text"
-                  error={errors.quantity}
-                  register={register("quantity", {
+                  error={errors.uniqueId}
+                  register={register("uniqueId", {
                     required: "this field cant be empty",
                   })}
                 />
